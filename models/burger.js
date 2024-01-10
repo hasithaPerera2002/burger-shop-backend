@@ -26,4 +26,4 @@ const BurgerSchema = mongoose.Schema({
   },
 });
 
-const Burger = mongoose.model("Burger", BurgerSchema);
+module.exports = mongoose.model("Burger", BurgerSchema);
