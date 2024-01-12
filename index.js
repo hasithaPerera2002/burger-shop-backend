@@ -1,3 +1,4 @@
+import e from "express";
 import express from "express";
 import mongoose from "mongoose";
 
@@ -15,4 +16,16 @@ mongoose
     console.log("Connection to MongoDB failed", err);
   });
 
-console.log("hii");
+app.use(express.json());
+app.use("/api/v1/burgers", require("./routes/burgers"));
+app.use("/api/v1/users", require("./routes/burgers"));
+app.use("/api/v1/employees", require("./routes/burgers"));
+app.use("/api/v1/order", require("./routes/burgers"));
+
+app.all("*", (req, res, next) => {
+  next(new CustomError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+app.use(globalErrorHandler);
+
+export default app;
