@@ -1,6 +1,6 @@
-import CustomErr from "./customErrorHandler";
+import CustomErr from "./customErrorHandler.js";
 
-module.exports = (err, req, res, next) => {
+export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   if (err.name == "CastError") {
     err = new CustomErr(`invalid value for ${err.path} : ${err.value}`, 400);
@@ -31,6 +31,8 @@ process.on("unhandledRejection", (err) => {
 
 process.on("uncaughtException", (err) => {
   console.log(err.name, err.message);
+  console.log(err);
+  console.log("anewwwww");
   console.log("UNCAUGHT EXCEPTION! Shutting down...");
   process.exit(1);
 });

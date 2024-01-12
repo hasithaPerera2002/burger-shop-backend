@@ -1,8 +1,8 @@
-import e from "express";
 import Burger from "../models/burger.js";
 import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addBurger = asyncErrorHandler(async (req, res, next) => {
+  console.log(req.body);
   const burger = new Burger({
     name: req.body.name,
     image: req.file.path,
@@ -27,6 +27,19 @@ const updateBurger = asyncErrorHandler(async (req, res, next) => {
         featured: req.body.featured,
         description: req.body.description,
         category: req.body.category,
+      },
+    }
+  ).then((burger) => {
+    res.status(200).json({ burger });
+  });
+});
+
+const updateBurgerImage = asyncErrorHandler(async (req, res, next) => {
+  Burger.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        image: req.file.path,
       },
     }
   ).then((burger) => {
@@ -78,6 +91,7 @@ const getBurgers = asyncErrorHandler(async (req, res, next) => {
 });
 
 const getBurger = asyncErrorHandler(async (req, res, next) => {
+  console.log(req.params.id);
   const burger = await Burger.findById(req.params.id);
   if (!burger) {
     return next(new CustomError("Burger not found", 404));
@@ -85,4 +99,11 @@ const getBurger = asyncErrorHandler(async (req, res, next) => {
   res.status(200).json({ burger });
 });
 
-export { addBurger, updateBurger, deleteBurger, getBurgers, getBurger };
+export {
+  addBurger,
+  updateBurger,
+  updateBurgerImage,
+  deleteBurger,
+  getBurgers,
+  getBurger,
+};
