@@ -84,3 +84,5 @@ const getBurger = asyncErrorHandler(async (req, res, next) => {
   }
   res.status(200).json({ burger });
 });
+
+export { addBurger, updateBurger, deleteBurger, getBurgers, getBurger };
