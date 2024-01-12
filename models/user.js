@@ -1,21 +1,23 @@
 import mongoose from "mongoose";
 const UserSchema = mongoose.Schema({
-  googleId,
+  googleId: {
+    type: String,
+  },
   username: {
     type: String,
     required: [true, "Username is required"],
   },
-  secondName: {
+  secondname: {
     type: String,
     required: [true, "Second name is required"],
   },
   password: {
     type: String,
     required: [true, "Password is required"],
-    minlength: [6, "Password must be at least 6 characters!"],
+    minlength: [2, "Password must be at least 6 characters!"],
   },
   email: {
-    type: email,
+    type: String,
     required: [true, "Email is required"],
     validate: {
       validator: function (value) {
@@ -25,5 +27,4 @@ const UserSchema = mongoose.Schema({
     },
   },
 });
-
-module.exports = mongoose.model("User", UserSchema);
+export default mongoose.model("User", UserSchema);
