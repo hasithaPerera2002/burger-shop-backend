@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import CustomError from "./util/customErrorHandler.js";
 import globalErrorHandler from "./util/globalErrorHandler.js";
 import burgerRouter from "./routes/burgerRouter.js";
+import orderRouter from "./routes/orderRouter.js";
 
 const app = express();
 mongoose
@@ -20,6 +21,7 @@ mongoose
 
 app.use(express.json());
 app.use("/api/v1/burgers", burgerRouter);
+app.use("/api/v1/orders", orderRouter);
 
 app.all("*", (req, res, next) => {
   next(new CustomError(`Can't find ${req.originalUrl} on this server!`, 404));

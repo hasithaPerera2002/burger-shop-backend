@@ -26,10 +26,14 @@ const OrderSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  staus: {
+  status: {
     type: String,
     enum: ["Pending", "Completed"],
 
     default: "Pending",
   },
 });
+
+const Order = mongoose.model("Order", OrderSchema);
+
+export default Order;
