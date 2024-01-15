@@ -5,7 +5,7 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
   console.log(req.body);
   const burger = new Burger({
     name: req.body.name,
-    image: req.file.path,
+    image: "http://localhost:3000/" + req.file.path,
     price: req.body.price,
     featured: req.body.featured,
     description: req.body.description,
@@ -22,7 +22,7 @@ const updateBurger = asyncErrorHandler(async (req, res, next) => {
     {
       $set: {
         name: req.body.name,
-        image: req.file.path,
+        image: "http://localhost:3000/" + req.file.path,
         price: req.body.price,
         featured: req.body.featured,
         description: req.body.description,
@@ -39,7 +39,7 @@ const updateBurgerImage = asyncErrorHandler(async (req, res, next) => {
     { _id: req.params.id },
     {
       $set: {
-        image: req.file.path,
+        image: "http://localhost:3000/" + req.file.path,
       },
     }
   ).then((burger) => {

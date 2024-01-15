@@ -3,11 +3,11 @@ import CustomErr from "./customErrorHandler.js";
 export default (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   if (err.name == "CastError") {
-    err = new CustomErr(`invalid value for ${err.path} : ${err.value}`, 400);
+    err = new CustomErr(`invalid value for ${err} : ${err.value}`, 400);
   }
 
   if (err.statusCode == 1000) {
-    err = new CustomErr(`duplicate value for ${err.keyValue.value}`, 400);
+    err = new CustomErr(`duplicate value for ${err}`, 400);
   }
 
   //mongoose errors
