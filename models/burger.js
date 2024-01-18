@@ -16,13 +16,9 @@ const BurgerSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  description: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    required: true,
+  offered: {
+    type: Boolean,
+    default: false,
   },
 });
 

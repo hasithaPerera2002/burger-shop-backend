@@ -6,10 +6,9 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
   const burger = new Burger({
     name: req.body.name,
     image: "http://localhost:3000/" + req.file.path,
-    price: req.body.price,
-    featured: req.body.featured,
-    description: req.body.description,
-    category: req.body.category,
+    price: JSON.parse(req.body.price),
+    featured: JSON.parse(req.body.featured),
+    offered: JSON.parse(req.body.offered),
   });
   await burger.save().then((burger) => {
     res.status(200).json({ burger });
@@ -23,10 +22,9 @@ const updateBurger = asyncErrorHandler(async (req, res, next) => {
       $set: {
         name: req.body.name,
         image: "http://localhost:3000/" + req.file.path,
-        price: req.body.price,
-        featured: req.body.featured,
-        description: req.body.description,
-        category: req.body.category,
+        price: JSON.parse(req.body.price),
+        featured: JSON.parse(req.body.featured),
+        offered: JSON.parse(req.body.offered),
       },
     }
   ).then((burger) => {
@@ -57,15 +55,15 @@ const deleteBurger = asyncErrorHandler(async (req, res, next) => {
 });
 
 const getBurgers = asyncErrorHandler(async (req, res, next) => {
-  const { featured, category, price, sort } = req.query;
+  const { featured, offered, price, sort } = req.query;
   const queryObj = {};
 
   if (featured) {
     queryObj.featured = featured === "true" ? true : false;
   }
 
-  if (category) {
-    queryObj.category = category;
+  if (offered) {
+    queryObj.offered = offered;
   }
 
   if (price) {
