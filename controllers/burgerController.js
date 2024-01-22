@@ -16,20 +16,28 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
 });
 
 const updateBurger = asyncErrorHandler(async (req, res, next) => {
-  Burger.updateOne(
-    { _id: req.params.id },
-    {
-      $set: {
-        name: req.body.name,
-        image: "http://localhost:3000/" + req.file.path,
-        price: JSON.parse(req.body.price),
-        featured: JSON.parse(req.body.featured),
-        offered: JSON.parse(req.body.offered),
-      },
+  console.log("update called");
+
+  const imagePath = req.file
+    ? "http://localhost:3000/" + req.file.path
+    : undefined;
+
+  const updateObject = {
+    name: req.body.name,
+    price: JSON.parse(req.body.price),
+    featured: JSON.parse(req.body.featured),
+    offered: JSON.parse(req.body.offered),
+  };
+
+  if (imagePath) {
+    updateObject.image = imagePath;
+  }
+
+  Burger.updateOne({ _id: req.params.id }, { $set: updateObject }).then(
+    (burger) => {
+      res.status(200).json({ burger });
     }
-  ).then((burger) => {
-    res.status(200).json({ burger });
-  });
+  );
 });
 
 const updateBurgerImage = asyncErrorHandler(async (req, res, next) => {
