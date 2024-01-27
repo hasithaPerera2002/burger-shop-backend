@@ -3,8 +3,9 @@ import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addOrder = asyncErrorHandler(async (req, res, next) => {
   const order = new Order({
-    user: req.body.userId,
-    burger: req.body.burger,
+    userId: req.body.userId,
+    burgerId: req.body.burgerId,
+    quantity: req.body.quantity,
     price: req.body.price,
     status: req.body.status,
     date: Date.now(),

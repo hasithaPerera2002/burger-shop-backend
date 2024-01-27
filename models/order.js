@@ -1,22 +1,19 @@
 import mongoose from "mongoose";
 
 const OrderSchema = mongoose.Schema({
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  burger: [
-    {
-      burger: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Burger",
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
+
+  burgerId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Burger",
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
 
   price: {
     type: Number,
