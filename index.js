@@ -6,6 +6,13 @@ import burgerRouter from "./routes/burgerRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import userRouter from "./routes/userRouter.js";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
+const URI = process.env.URI;
+const clientOptions = {
+  serverApi: { version: "1", strict: true, deprecationErrors: true },
+};
 
 const app = express();
 
@@ -13,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/uploads", express.static("uploads"));
 
 mongoose
-  .connect("mongodb://localhost:27017/burger", {})
+  .connect(URI, clientOptions)
   .then(() => {
     console.log("Connected to MongoDB");
 
