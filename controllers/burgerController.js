@@ -3,7 +3,7 @@ import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addBurger = asyncErrorHandler(async (req, res, next) => {
   console.log(req.body);
-  const image = req.body.image ? req.body.image : "default-image-url"; // Set a default URL or handle it as needed
+  const image = req.body.image || "default-image-url"; // Set a default URL or handle it as needed
 
   const burger = new Burger({
     name: req.body.name,

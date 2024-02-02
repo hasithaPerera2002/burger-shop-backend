@@ -44,8 +44,8 @@ const upload = async (req, res, next) => {
       const downloadURL = await getDownloadURL(snapshot.ref);
 
       req.body.image = downloadURL;
-      res.body.image = downloadURL;
-      next(req, res, next);
+
+      next();
     });
   } catch (error) {
     next(new CustomError("File upload failed: " + error.message, 500));
