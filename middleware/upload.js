@@ -14,6 +14,8 @@ initializeApp(firebaseConfig);
 const fireStorage = getStorage();
 
 const storage = multer({ storage: multer.memoryStorage() });
+const multerUpload = multer({ storage: storage });
+
 const upload = async (req, res, next) => {
   const file = req.body.file || req.file;
   if (!file) {
@@ -31,7 +33,7 @@ const upload = async (req, res, next) => {
       });
     })
     .catch((err) => {
-      return next(new CustomError("File upload failed", 500));
+      return next(new CustomError("File upload failed " + err.message, 500));
     });
 };
 
