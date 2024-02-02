@@ -2,7 +2,6 @@ import Burger from "../models/burger.js";
 import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addBurger = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.body);
   const image = req.body.image || "default-image-url"; // Set a default URL or handle it as needed
 
   const burger = new Burger({
@@ -18,8 +17,6 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
 });
 
 const updateBurger = asyncErrorHandler(async (req, res, next) => {
-  console.log("update called");
-
   const imagePath = req.image;
 
   const updateObject = {
@@ -97,7 +94,6 @@ const getBurgers = asyncErrorHandler(async (req, res, next) => {
 });
 
 const getBurger = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.params.id);
   const burger = await Burger.findById(req.params.id);
   if (!burger) {
     return next(new CustomError("Burger not found", 404));

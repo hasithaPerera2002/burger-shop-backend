@@ -2,7 +2,6 @@ import Order from "../models/order.js";
 import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addOrder = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.body, "order");
   const order = new Order({
     userId: req.body.userId,
     burgerId: req.body.burgerId,

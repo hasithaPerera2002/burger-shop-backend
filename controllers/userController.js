@@ -2,8 +2,6 @@ import User from "../models/user.js";
 import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addUser = asyncErrorHandler(async (req, res, next) => {
-  console.log(req.body);
-
   const user = new User({
     username: req.body.userName,
     secondname: req.body.secondName,
