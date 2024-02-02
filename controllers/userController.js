@@ -16,6 +16,7 @@ const addUser = asyncErrorHandler(async (req, res, next) => {
 });
 
 const login = asyncErrorHandler(async (req, res, next) => {
+  console.log(req.body);
   const email = req.body.email;
   const password = req.body.password;
 
