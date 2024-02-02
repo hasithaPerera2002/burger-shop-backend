@@ -8,9 +8,9 @@ import {
 } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { config } from "../firebase/firebaseConfig.js";
-import { Express } from "express";
+import express from "express";
 
-const router = Express.Router();
+const router = express.Router();
 
 initializeApp(config.firebaseConfig);
 
