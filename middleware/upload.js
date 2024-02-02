@@ -22,7 +22,7 @@ const upload = async (req, res, next) => {
           new CustomError("Multer upload failed: " + err.message, 500)
         );
       }
-      console.log(req.body);
+
       const file = req.file || req.body.file;
       if (!file) {
         return next(new CustomError("Please upload a file", 400));
@@ -42,10 +42,10 @@ const upload = async (req, res, next) => {
         metadata
       );
       const downloadURL = await getDownloadURL(snapshot.ref);
-      console.log("File available at", downloadURL);
-      req.image = downloadURL;
-      res.image = downloadURL;
-      next();
+
+      req.body.image = downloadURL;
+      res.body.image = downloadURL;
+      next(req, res, next);
     });
   } catch (error) {
     next(new CustomError("File upload failed: " + error.message, 500));
