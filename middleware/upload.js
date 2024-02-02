@@ -44,6 +44,7 @@ const upload = async (req, res, next) => {
       const downloadURL = await getDownloadURL(snapshot.ref);
       console.log("File available at", downloadURL);
       req.image = downloadURL;
+      res.image = downloadURL;
       next();
     });
   } catch (error) {
