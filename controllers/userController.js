@@ -35,7 +35,7 @@ const login = asyncErrorHandler(async (req, res, next) => {
 
 const comparePassword = async (candidatePassword, password) => {
   try {
-    return await bcrypt.compare(candidatePassword, password);
+    return candidatePassword === password;
   } catch (error) {
     throw new Error(error);
   }
