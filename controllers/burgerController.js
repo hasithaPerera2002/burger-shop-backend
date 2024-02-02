@@ -5,7 +5,7 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
   console.log(req.body);
   const burger = new Burger({
     name: req.body.name,
-    image: "https://ephemeral-lollipop-0ed82a.netlify.app/" + req.file.path,
+    image: req.image,
     price: JSON.parse(req.body.price),
     featured: JSON.parse(req.body.featured),
     offered: JSON.parse(req.body.offered),
@@ -18,9 +18,7 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
 const updateBurger = asyncErrorHandler(async (req, res, next) => {
   console.log("update called");
 
-  const imagePath = req.file
-    ? "https://ephemeral-lollipop-0ed82a.netlify.app/" + req.file.path
-    : undefined;
+  const imagePath = req.image;
 
   const updateObject = {
     name: req.body.name,
@@ -45,7 +43,7 @@ const updateBurgerImage = asyncErrorHandler(async (req, res, next) => {
     { _id: req.params.id },
     {
       $set: {
-        image: "https://ephemeral-lollipop-0ed82a.netlify.app/" + req.file.path,
+        image: req.image,
       },
     }
   ).then((burger) => {
