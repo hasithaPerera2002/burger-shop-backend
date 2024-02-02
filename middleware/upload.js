@@ -41,4 +41,4 @@ const upload = async (req, res, next) => {
   }
 };
 
-export { upload };
+export default upload;
