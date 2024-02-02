@@ -9,9 +9,9 @@ import firebaseConfig from "../firebase/firebaseConfig.js";
 import CustomError from "../util/customErrorHandler.js";
 import multer from "multer";
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const fireStorage = getStorage();
+const fireStorage = getStorage(app);
 const multerUpload = multer({ storage: multer.memoryStorage() });
 
 const upload = async (req, res, next) => {
