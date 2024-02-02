@@ -10,12 +10,12 @@ import {
 import upload from "../middleware/upload.js";
 
 const router = express.Router();
-router.route("/").get(getBurgers).post(upload.single("image"), addBurger);
+router.route("/").get(getBurgers).post(upload, addBurger);
 router
   .route("/:id")
-  .put(upload.single("image"), updateBurger)
+  .put(upload, updateBurger)
   .get(getBurger)
   .delete(deleteBurger);
-router.route("/image/:id").put(upload.single("image"), updateBurgerImage);
+router.route("/image/:id").put(upload, updateBurgerImage);
 
 export default router;

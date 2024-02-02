@@ -7,17 +7,14 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import { config } from "../firebase/firebaseConfig.js";
-import express from "express";
+import firebaseConfig from "../firebase/firebaseConfig.js";
 
-const router = express.Router();
-
-initializeApp(config.firebaseConfig);
+initializeApp(firebaseConfig);
 
 const fireStorage = getStorage();
 
 const storage = multer({ storage: multer.memoryStorage() });
-router.post("/", storage.single("image"), async (req, res, next) => {
+const upload = async (req, res, next) => {
   const file = req.body.file || req.file;
   if (!file) {
     return next(new CustomError("Please upload a file", 400));
@@ -26,13 +23,16 @@ router.post("/", storage.single("image"), async (req, res, next) => {
   const metadata = {
     contentType: file.mimetype,
   };
-  await uploadBytesResumable(imageRef, file.buffer, metadata).then(
-    (snapshot) => {
+  await uploadBytesResumable(imageRef, file.buffer, metadata)
+    .then((snapshot) => {
       getDownloadURL(snapshot.ref).then((downloadURL) => {
-        res.status(200).json({ downloadURL });
+        req.image = downloadURL;
+        next();
       });
-    }
-  );
-});
+    })
+    .catch((err) => {
+      return next(new CustomError("File upload failed", 500));
+    });
+};
 
 export default upload;
