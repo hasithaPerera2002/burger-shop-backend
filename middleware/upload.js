@@ -14,7 +14,7 @@ const fireStorage = getStorage();
 
 const upload = async (req, res, next) => {
   try {
-    const file = req.body.file || req.file;
+    const file = req.body.file || req.file || req.body.image || req.image;
     if (!file) {
       throw new CustomError("Please upload a file", 400);
     }
