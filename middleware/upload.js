@@ -30,7 +30,7 @@ const upload = async (req, res, next) => {
 
       const imageRef = ref(
         fireStorage,
-        "images/" + file.originalname + Date.now()
+        "files/" + file.originalname + Date.now()
       );
       const metadata = {
         contentType: file.mimetype,
