@@ -42,7 +42,7 @@ const upload = async (req, res, next) => {
         metadata
       );
       const downloadURL = await getDownloadURL(snapshot.ref);
-
+      console.log("File available at", downloadURL);
       req.image = downloadURL;
       next();
     });
