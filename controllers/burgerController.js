@@ -3,7 +3,7 @@ import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addBurger = asyncErrorHandler(async (req, res, next) => {
   const image = req.body.image || "default-image-url";
-
+  console.log(req.body);
   const burger = new Burger({
     name: req.body.name,
     image: image,
@@ -18,7 +18,7 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
 
 const updateBurger = asyncErrorHandler(async (req, res, next) => {
   const image = req.body.image || "default-image-url";
-
+  console.log(req.body);
   const updateObject = {
     name: req.body.name,
     image: image,
