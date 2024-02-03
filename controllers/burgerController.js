@@ -2,7 +2,7 @@ import Burger from "../models/burger.js";
 import asyncErrorHandler from "../util/asyncErrorHandler.js";
 
 const addBurger = asyncErrorHandler(async (req, res, next) => {
-  const image = req.body.image || "default-image-url"; // Set a default URL or handle it as needed
+  const image = req.body.image || "default-image-url";
 
   const burger = new Burger({
     name: req.body.name,
@@ -17,10 +17,11 @@ const addBurger = asyncErrorHandler(async (req, res, next) => {
 });
 
 const updateBurger = asyncErrorHandler(async (req, res, next) => {
-  const imagePath = req.image;
+  const image = req.body.image || "default-image-url";
 
   const updateObject = {
     name: req.body.name,
+    image: image,
     price: JSON.parse(req.body.price),
     featured: JSON.parse(req.body.featured),
     offered: JSON.parse(req.body.offered),
