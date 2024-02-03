@@ -27,15 +27,14 @@ const updateBurger = asyncErrorHandler(async (req, res, next) => {
     offered: JSON.parse(req.body.offered),
   };
 
-  if (imagePath) {
-    updateObject.image = imagePath;
-  }
-
-  Burger.updateOne({ _id: req.params.id }, { $set: updateObject }).then(
-    (burger) => {
+  Burger.updateOne({ _id: req.params.id }, { $set: updateObject })
+    .then((burger) => {
       res.status(200).json({ burger });
-    }
-  );
+    })
+    .catch((err) => {
+      console.log(err);
+      next(new CustomError("Burger not found", 404));
+    });
 });
 
 const updateBurgerImage = asyncErrorHandler(async (req, res, next) => {
